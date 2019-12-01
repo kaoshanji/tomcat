@@ -19,7 +19,7 @@ nbproject
 output
 # Next line commented out, because test/webapp-virtual-library and
 # test/webapp-virtual-webapp use it:
-# target
+target
 work
 build.properties
 mvn.properties
@@ -43,3 +43,61 @@ java/org/apache/catalina/startup/catalina.properties
 modules/jdbc-pool/bin
 modules/jdbc-pool/includes
 webapps/docs/jdbc-pool.xml
+
+HELP.md
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### Eclipse ###
+.classpath
+.project
+.settings/
+
+**/.mvnw
+/.mvn
+*.mvn
+target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### Package Files ###
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Log file
+*.log
+logs/
+
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+# Mac
+.DS_Store
+
+_book/

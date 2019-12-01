@@ -32,12 +32,16 @@ public class LimitLatch {
 
     private static final Log log = LogFactory.getLog(LimitLatch.class);
 
+    // AbstractQueuedSynchronizer 控制线程什么时候挂起，什么时候唤醒
+    // 控制线程的阻塞和唤醒
+    // 具体什么时候阻塞、什么时候唤醒你的逻辑决定
     private class Sync extends AbstractQueuedSynchronizer {
         private static final long serialVersionUID = 1L;
 
         public Sync() {
         }
 
+        // 判断是否阻塞用户线程
         @Override
         protected int tryAcquireShared(int ignored) {
             long newCount = count.incrementAndGet();
@@ -50,6 +54,7 @@ public class LimitLatch {
             }
         }
 
+        // 唤醒用户线程
         @Override
         protected boolean tryReleaseShared(int arg) {
             count.decrementAndGet();
@@ -57,6 +62,7 @@ public class LimitLatch {
         }
     }
 
+    // 并发编程的实际运用..修饰符
     private final Sync sync;
     private final AtomicLong count;
     private volatile long limit;
@@ -106,6 +112,8 @@ public class LimitLatch {
 
 
     /**
+     * 线程调用这个方法获得新连接的许可，可能被阻塞
+     * 获得锁，暂时无法获得就阻塞到 AQS队列中
      * Acquires a shared latch if one is available or waits for one if no shared
      * latch is current available.
      * @throws InterruptedException If the current thread is interrupted
@@ -118,6 +126,7 @@ public class LimitLatch {
     }
 
     /**
+     * 释放一个连接许可，前面阻塞的线程可能被唤醒
      * Releases a shared latch, making it available for another thread to use.
      * @return the previous counter value
      */
